@@ -2,12 +2,12 @@
 # Technologies
  1) Django 
  2) Python 
- -) Javascript 
- -) Paper css
- -) jQuerry 
- -) Html 
- -) CSS 
- -) Materialize ccs framework 
+ 3) Javascript 
+ 4) Paper css
+ 5) jQuerry 
+ 6) Html 
+ 7) CSS 
+ 8) Materialize ccs framework 
  
  
  
