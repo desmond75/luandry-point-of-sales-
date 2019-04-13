@@ -26,13 +26,13 @@
  # Login Page 
  ![pic](https://user-images.githubusercontent.com/27916806/55960629-3d901c00-5c7e-11e9-8cb2-333abac9858e.PNG)
   # Registering a new customer 
-![pic2](https://user-images.githubusercontent.com/27916806/55960657-4c76ce80-5c7e-11e9-9311-0081ac52ce0a.PNG)
+![pic2](https://user-images.githubusercontent.com/27916806/56082020-cfd22480-5e24-11e9-9777-88d5601a3d23.PNG)
  # Dashboard
- ![pic1](https://user-images.githubusercontent.com/27916806/55961189-5f3dd300-5c7f-11e9-9ff2-6f43b1e9b857.PNG)
+![pic1](https://user-images.githubusercontent.com/27916806/56082015-c779e980-5e24-11e9-991a-3c266622154c.PNG)
  # Checkout
  ![pic4](https://user-images.githubusercontent.com/27916806/55960649-4680ed80-5c7e-11e9-86a9-41270e2e3ab8.PNG)
  # Printed receipt  
 ![WhatsApp Image 2019-04-10 at 6 20 30 PM (1)](https://user-images.githubusercontent.com/27916806/55960662-4f71bf00-5c7e-11e9-8b4f-1f3160a13126.jpeg)
  # Small in build calculated (Added by me just for curiosity)
-![pic3](https://user-images.githubusercontent.com/27916806/55960668-526caf80-5c7e-11e9-99d5-32b2aad98f10.PNG)
+![pic3](https://user-images.githubusercontent.com/27916806/56082025-d3fe4200-5e24-11e9-83aa-557f111eb79e.PNG)
 
