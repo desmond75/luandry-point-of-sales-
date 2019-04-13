@@ -25,12 +25,12 @@
  
  # Login Page 
  ![pic](https://user-images.githubusercontent.com/27916806/55960629-3d901c00-5c7e-11e9-8cb2-333abac9858e.PNG)
+  # Registering a new customer 
+![pic2](https://user-images.githubusercontent.com/27916806/55960657-4c76ce80-5c7e-11e9-9311-0081ac52ce0a.PNG)
  # Dashboard
  ![pic1](https://user-images.githubusercontent.com/27916806/55961189-5f3dd300-5c7f-11e9-9ff2-6f43b1e9b857.PNG)
  # Checkout
  ![pic4](https://user-images.githubusercontent.com/27916806/55960649-4680ed80-5c7e-11e9-86a9-41270e2e3ab8.PNG)
- # Registering a new customer 
-![pic2](https://user-images.githubusercontent.com/27916806/55960657-4c76ce80-5c7e-11e9-9311-0081ac52ce0a.PNG)
  # Printed receipt  
 ![WhatsApp Image 2019-04-10 at 6 20 30 PM (1)](https://user-images.githubusercontent.com/27916806/55960662-4f71bf00-5c7e-11e9-8b4f-1f3160a13126.jpeg)
  # Small in build calculated (Added by me just for curiosity)
