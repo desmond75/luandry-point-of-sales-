@@ -30,7 +30,7 @@
  # Dashboard
 ![pic1](https://user-images.githubusercontent.com/27916806/56082015-c779e980-5e24-11e9-991a-3c266622154c.PNG)
  # Checkout
- ![pic4](https://user-images.githubusercontent.com/27916806/55960649-4680ed80-5c7e-11e9-86a9-41270e2e3ab8.PNG)
+ ![pic4](https://user-images.githubusercontent.com/27916806/56082026-d5c80580-5e24-11e9-8ec5-f5c1159af07e.PNG)
  # Printed receipt  
 ![WhatsApp Image 2019-04-10 at 6 20 30 PM (1)](https://user-images.githubusercontent.com/27916806/55960662-4f71bf00-5c7e-11e9-8b4f-1f3160a13126.jpeg)
  # Small in build calculated (Added by me just for curiosity)
