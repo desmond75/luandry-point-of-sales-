@@ -1,7 +1,7 @@
 # This is a web based point of sales application i build
 # You can clone and user the default user to login and play with it 
-1)User: root77
-2)Password: root77
+1) User: root77
+2) Password: root77
 3) Custmer contact: 0551359219
 
 # Technologies
