@@ -16,9 +16,6 @@ import datetime
 
 activities = {'WashAndPress':'W & P','DryCleaning':'DC', 'PressOnly':'PO'}
 services = {'Normal':'Nor','Urgent':'Urg', 'Premium':'Pre'}
-
-
-
 context = {'date':'{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())}
 
 def index(request):
