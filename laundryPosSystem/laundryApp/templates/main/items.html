@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>{% block title %} {% endblock %}</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="cyan accent-4">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">Wonderwash</a>
+            <ul class="hide-on-med-and-down right">
+              {% if user.is_authenticated %}
+                <li>
+                   <div class="center row">
+                      <div class="col s12 " >
+                        <div class="row" id="topbarsearch">
+                            <div class="input-field col s6 s12 red-text">
+                              <form method="get" action="{% url 'result' %}">
+                                <input type="text" placeholder="search" name="q" id="autocomplete-input" class="autocomplete  browser-default">
+                              </form>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li><a class="waves-effect waves-light modal-trigger" href="#calculator">Calc</a></li>
+                  <li><a class="waves-effect waves-light modal-trigger" href="http://127.0.0.1:8000/admin">Admin</a></li>
+                  <li><a href="{% url 'logout' %}">Logout</a></li>
+                  {% else %}
+                  {% endif %}
+            </ul>
+        </div>
+      </nav>
+      <div id="calculator" class="modal " style="background-color:#e8f3f8">
+        <div class="modal-content">
+          <div class="col s12 m6 l6 loginForm">
+            <div class="row">
+              <div class="col s3">
+              </div>
+              <div class="col s12 l6 center">
+                <input type="text" name="" class="browser-default" disabled="true" style="height:45px" id="screen">
+                <div class="" style="margin-top:10px">
+                    <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4  calNumber" id="7" title="7">7</a>
+                    <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" id="8" title="8">8</a>
+                    <a class="btn btn-large btn-floating waves-effect waves-light cyan accent-4 calNumber" id="9" title="9">9</a>
+                    <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1 calNumber" id="/" title="/">/</a>
+                    <a class="btn btn-large btn-floating waves-effect waves-light red lighten-3" title="AC" id="AC" >AC</a>
+                </div>
+                <div class="" >
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" title="4" id="4">4</a>
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" id="5" title="5">5</a>
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" id="6" title="6">6</a>
+                  <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1 calNumber" id="*" title="*">*</a>
+                  <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1" title="Del" id="calculatorDeleteButton">Del</a>
+                </div>
+                <div class="">
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" title="1" id="1">1</a>
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" id="2" title="2">2</a>
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber"  id="3" title="3">3</a>
+                  <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1 calNumber" id="-" title="-">-</a>
+                  <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1 calNumber" id="+" title="+">+</a>
+
+                </div>
+                <div class="">
+                  <a class="btn btn-large  waves-effect waves-light cyan accent-4 calNumber" id="0" title="0" style="width:115px">0</a>
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber"  id="." title=".">.</a>
+                  <a class="btn btn-large waves-effect waves-light blue-grey lighten-1"  id="equal" title="=" style="width:115px">=</a>
+                </div>
+              </div>
+              <div class="col s3">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="closeCalculator">Close</a>
+        </div>
+      </div>
+      <div class="container">
+        <div><a class="" href="{% url 'dashboard' %}">Go back</a></div>
+        <dl class="">
+          <dt><b>Order ID</b>: {{order_id}}</dt>
+          <dt><b>Customer</b> :  {{customer_details.customer_name}}</dt>
+          <dt><b>Date</b>: {{customer_details.date}}</dt>
+          <dt><b>List of items</b>:</dt>
+        </dl>
+        <table id="" class="highlight">
+          <thead id='tableHead'>
+            <tr>
+              <th>Item</th>
+              <th>Number</th>
+              <th>Activity</th>
+              <th>Service type</th>
+              <th>Price</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          {% if items %}
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td>{{item.item}}</td>
+              <td>{{item.number_of_items}}</td>
+              <td>{{item.activity}}</td>
+              <td>{{item.service_type}}</td>
+              <td>{{item.price}}</td>
+              <td>{{item.date}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          {% else %}
+           <p>No items</p>
+          {% endif %}
+        </table>
+      </div>
+  <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+  <script src="{% static 'js/materialize.js' %}"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/calculator.js' %}"></script>
+  <script src="{% static 'js/markOrderAsPay.js' %}"></script>
+  {% block javascript %}{% endblock %}
+
+
+  </body>
+</html>

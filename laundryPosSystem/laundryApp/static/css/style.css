@@ -1,0 +1,96 @@
+
+
+/* .icon-block {
+  padding: 0 15px;
+} */
+/* .icon-block .material-icons {
+	font-size: inherit;
+} */
+
+.btn {
+    text-transform: none;
+    margin-bottom:5px;
+}
+.body {
+    background-color: #e8f3f8
+  }
+
+.loginForm {
+  margin-top: 50px
+}
+
+#id_activity{
+  height: 35px;
+  border-radius: 5px;
+  width: 100%;
+  border: 2px solid #9e9e9e;
+  background-color: 'white';
+  padding-left: 5px;
+
+}
+input[type="number"]{
+  height: 35px;
+  border-radius: 5px;
+  width: 100%;
+  border: 2px solid #9e9e9e;
+  background-color: 'white';
+  padding-left: 5px;
+
+}
+input[type="text"]{
+  height: 35px;
+  border-radius: 5px;
+  border: 2px solid #9e9e9e;
+  width: 100%;
+  background-color: 'white';
+  padding-left: 5px;
+}
+input[type="password"]{
+  height: 35px;
+  border-radius: 5px;
+  border: 2px solid #9e9e9e;
+  width: 100%;
+  padding-left: 5px;
+}
+#id_service_type{
+  height: 35px;
+  border-radius: 5px;
+  border: 2px solid #9e9e9e;
+  width: 100%;
+  background-color: 'white';
+  padding-left: 5px;
+
+}
+#id_discounted{
+  height: 35px;
+  border-radius: 5px;
+  border: 2px solid #9e9e9e;
+  width: 100%;
+  background-color: 'white';
+  padding-left: 5px;
+
+}
+
+#id_salesman{
+  height: 35px;
+  border-radius: 5px;
+  border: 2px solid #9e9e9e;
+  width: 100%;
+  padding-left: 5px;
+
+}
+#id_cloth_type{
+  height: 35px;
+  border-radius: 5px;
+  border: 2px solid #9e9e9e;
+  width: 100%;
+  padding-left: 5px;
+
+}
+/* #searchform{
+  height: 35px;
+  border-radius: 5px;
+  border: 2px solid #9e9e9e;
+  width: 200px;
+  background-color: 'snow';
+} */

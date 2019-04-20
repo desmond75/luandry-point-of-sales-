@@ -1,0 +1,351 @@
+{% extends 'base.html'%}
+  {% block title %}dashboard{% endblock %}
+  {% block body %}
+  {% load static %}
+  <!-- Receipt modal-->
+    <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
+    <div id="reciept" class="modal" >
+      <div class="modal-content" id="printingReceipt">
+        {% block head %}
+        <!-- Normalize or reset CSS with your favorite library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
+        <style>
+          #receiptTableBody tr{ font-size: 12pt;margin-left:38mm; font-family:Arial, Helvetica, sans-serif}
+          #demo {padding: 35mm; margin-left: 30mm}
+          .total {font-size: 13pt; line-height: 7mm;}
+        </style>
+        {% endblock%}
+        <body class="">
+          <section class="sheet">
+            <center><h4 style="font-family:sans serif; font-size: 18pt;"><img src="{% static 'images/Capture.PNG'%}"/></h4></center>
+            <center><h4 style="font-family:sans serif; font-size: 10pt;">{{date}}</h4></center>
+            <center><h4 style="font-family:sans serif; font-size: 10pt;">{{order.invoice_number}}</h4></center>
+
+            <hr>
+            <center>
+              <table id="receiptTableHead" class="">
+                <thead id=''>
+                  <tr>
+                    <th style="font-size: 11pt; line-height: 7mm;" class="">Item</th>
+                    <th style="font-size: 11pt;line-height: 7mm;">Qty</th>
+                    <th style="font-size: 11pt; line-height: 7mm;">Service</th>
+                    <th style="font-size: 11pt;line-height: 7mm;">Activity</th>
+                    <th style="font-size: 11pt; line-height: 7mm;">Unit/P</th>
+                    <th style="font-size: 11pt; line-height: 7mm;">Price</th>
+                  </tr>
+                </thead>
+                <tbody id='receiptTableBody'>
+                  {% if current_order %}
+                  {% for item in current_order %}
+                      <tr style='margin-top:30mm;'>
+                        <td style="line-height: 7mm">{{item.item}}</td>
+                        <td style="line-height: 7mm">{{item.number_of_items}}</td>
+                        <td style="line-height: 7mm">{{item.service_type}}</td>
+                        <td style="line-height: 7mm">{{item.activity}}</td>
+                        <td style="line-height: 7mm">{{item.price_per_item}}</td>
+                        <td style="line-height: 7mm"> {{item.price}}</td>
+                      </tr>
+                    {% endfor %}
+                    {% endif %}
+                    <tr style='margin-bottom:3mm'>
+                      <td class="total">VAT</td>
+                      <td>0</td>
+                    </tr>
+                    <tr style='margin-bottom:3mm'>
+                      <td class="total">Total</td>
+                      {% if price %}
+                      <td>{{price}}</td>
+                      {% endif %}
+                    </tr>
+                </tbody>
+              </table>
+          </center>
+                <div id="demo">barcode</div>
+          </section>
+        </body>
+
+        <!-- <button type="button"  name="button" id='print'>print</button> -->
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div><!--End of receipt modal -->
+
+  <!-- Calculator modal --->
+  <div id="calculator" class="modal " style="background-color:#e8f3f8">
+    <div class="modal-content">
+      <div class="col s12 m6 l6 loginForm">
+        <div class="row">
+          <div class="col s3">
+          </div>
+          <div class="col s12 l6 center">
+            <input type="text" name="" class="browser-default" disabled="true" style="height:45px" id="screen">
+            <div class="" style="margin-top:10px">
+                <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4  calNumber" id="7" title="7">7</a>
+                <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" id="8" title="8">8</a>
+                <a class="btn btn-large btn-floating waves-effect waves-light cyan accent-4 calNumber" id="9" title="9">9</a>
+                <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1 calNumber" id="/" title="/">/</a>
+                <a class="btn btn-large btn-floating waves-effect waves-light red lighten-3" title="AC" id="AC" >AC</a>
+            </div>
+            <div class="" >
+              <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" title="4" id="4">4</a>
+              <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" id="5" title="5">5</a>
+              <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" id="6" title="6">6</a>
+              <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1 calNumber" id="*" title="*">*</a>
+              <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1" title="Del" id="calculatorDeleteButton">Del</a>
+            </div>
+            <div class="">
+              <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" title="1" id="1">1</a>
+              <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber" id="2" title="2">2</a>
+              <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber"  id="3" title="3">3</a>
+              <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1 calNumber" id="-" title="-">-</a>
+              <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1 calNumber" id="+" title="+">+</a>
+            </div>
+            <div class="">
+              <a class="btn btn-large  waves-effect waves-light cyan accent-4 calNumber" id="0" title="0" style="width:115px">0</a>
+              <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 calNumber"  id="." title=".">.</a>
+              <a class="btn btn-large waves-effect waves-light blue-grey lighten-1"  id="equal" title="=" style="width:115px">=</a>
+            </div>
+          </div>
+          <div class="col s3">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="closeCalculator">Close</a>
+    </div>
+  </div>
+  <!-- End of calculator modal -->
+
+<!-- Modal Structure Checkout modal-->
+<div id="modal3" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h5 id="completed"></h5>
+    <h5>Total</h5>
+    <h4 class="center" style="font-size:80px"><span id="subtotal">0</span><span style=""> AED</span></h4>
+    <label for=""><h6>Tender</h6></label>
+    <input type="number" name="tender" id='tender' value="0" class="browser-default">
+    <h6>Balance</h6>
+    <h4 id="change" style="margin-top:10px"  class="center"></h4>
+    <h1 class=" center"><a class="waves-effect waves-light  green  btn-small"  id='finalizeOrderButton'>Finalize order</a><br> <a class="waves-effect waves-light  blue-grey lighten-1   btn-small"  id='printFinalize'>Print receipt</a></h1>
+
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-default btn green lighten-2" id="closeButton">Close</a>
+  </div>
+</div>
+
+<!-- Begining of add_new_customer Modal-->
+  <div id="modal2" class="modal " style="background-color:#e8f3f8">
+    <div class="modal-content">
+      <div class="col s12 m6 l6 loginForm">
+        <center>
+          <p id="notif"></p>
+          <h5><i> New customer </i></h5>
+        </center>
+        <form class="" action="" method="post">
+            {% csrf_token %}
+            {% for field in customer_form %}
+            <label for=""><h6>{{field.label}}</h6></label>
+            {{field}}
+            {% endfor %}
+            <button style="margin-top:20px" id="addNewCustomer" class="btn  waves-effect waves-light modal-close cyan accent-4" type="submit" name="action">
+              Add customer
+            </button>
+        </form>
+
+        <p id="error"></p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
+  <!-- Modal Trigger -->
+    <div id="modal1" class="modal modal-fixed-footer">
+      <div class="modal-content">
+          <h5>Select</h5>
+          <div class="">
+            <a class="btn btn-large waves-effect waves-light  blue-grey lighten-1 modal-close item" id="TwoPcSuite" title="2 Pc Suite">2 Pc Suite</a>
+            <a class="btn btn-large waves-effect waves-light  blue-grey lighten-1  modal-close item" id="ThreePcSuite" title="3 Pc Suite">3 Pc Suite</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1  modal-close item" id="BlanketsSm" title="Blankets(S-m)">Blankets(S-m)</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1   modal-close item"  id="CoatSlashJacket">Jacket/Coat</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1  modal-close item" id="BlanketsLPlus" title="Blankets (L+)">Blankets(L+)</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1  modal-close item" id="Dishdasha" title="Dishdasha">Dishdasha</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1  modal-close item" id="Dupatta" title="Dupatta">Dupatta</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1  modal-close item" id="JoggingBottoms" title="Jogging Bottoms">Jogging Bottoms</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close  item" id="JumperSlashCardigan" title="Jumper/Cardigan">Jumper/Cardigan</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="LeatherJacketCoat" title="Leather Jacket/Coat">Leather Jacket/Coat</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="Overcoat" title="Overcoat">Overcoat</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="SalwarKameez" title="Salwar Kameez">Salwar Kameez</a>
+            <a class="btn  btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="Nightgown">Night Gown</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="Shailah" title="Shailah">Shailah</a>
+            <a class="btn btn-large waves-effect waves-light  blue-grey lighten-1 modal-close item" id="Swimsuit" title="Swim suit">Swim suit</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="Thobe" title="Thobe">Thobe</a>
+            <a class="btn btn-large waves-effect waves-light  blue-grey lighten-1 modal-close item" id="Trouser" title="Trouser">Trouser</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" title="Single Bed Sheet" id="SingleBedSheet">Single Bed Sheet</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" title="DoubleBedSheet" id="DoubleBedSheet">Double Bed Sheet</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="Undergarments" title="Undergarments">Undergarments</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="Waistcoat" title="Waistcoat">Waistcoat</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="Overcoat" title="HOvercoat">Overcoat</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="HandTowel" title="Hand Towel">Hand Towel</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="FaceTowel" title="Face Towel">Face Towel</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="BathTowel" title="Bath Towel">Bath Towel</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="BathRobe" title="Bath Robe">Bath Robe</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="BeachTowel" title="Beach Towel">Beach Towel</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="TableCloth" title="Table Cloth">Table Cloth</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="Napkins" title="Napkins">Napkins</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="CushionCover" title="Cushion Cover">Cushion Cover</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="SofaThrow" title="Sofa Throw">Sofa Throw</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="SingleBedSheet" title="Single Bed Sheet">Single Bed Sheet</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="SingleBedSheet" title="Single Bed Sheet">Single Bed Sheet</a>
+            <a class="btn btn-large waves-effect waves-light  blue-grey lighten-1 modal-close item" id="KingSizeBedSheet" title="King SizeBed Sheet">KingSize Bed Sheet</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="BathMat" title="Bath Mat">Bath Mat</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="ComforterSm" title="Comforter (S-m)">Comforter (S-m)</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="ComforterLPlus" title="Comforter (L+)">Comforter (L+)</a>
+            <a class="btn btn-large waves-effect waves-light  blue-grey lighten-1 modal-close item" id="BedRunner" title="Bed Runner">Bed Runner</a>
+            <a class="btn btn-large waves-effect waves-light  blue-grey lighten-1 modal-close item" id="BedThrow" title="Bed Throw">Bed Throw</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item"  id="DuvetCover" title="Duvet Cover">Duvet Cover</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="FlatSheet" title="Flat Sheet">Flat Sheet</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="MattressProtectorSingle" title="Mattress Protector (Single)">Mattress Protector (Single)</a>
+            <a class="btn btn-large waves-effect waves-light blue-grey lighten-1 modal-close item" id="MattressProtectorDouble" title="Mattress Protector (Single)">Mattress Protector (Double)</a>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
+
+
+  <div class="row" id="dashboardBody">
+    <div class="col s12 m6 l6">
+      <div class="card-panel" style="min-height:580px;position:relative" id="selected_elements">
+        {% autoescape off %}
+        <div style="max-height:450px;overflow-y: auto;">
+            <table id="itemTable" class="highlight">
+              <thead id='tableHead'>
+                <tr>
+                  <th>Item</th>
+                  <th>Quantity</th>
+                  <th>Service</th>
+                  <th>Activity</th>
+                  <th>Unit price</th>
+                  <th>Total price</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody id='tableBody'>
+                {% if current_order %}
+                {% for item in current_order %}
+                    <tr id='row{{item.id}}'>
+                      <td>{{item.item}}</td>
+                      <td> <input type="text" class="browser-default" style="width:50px" disabled='true' value="{{item.number_of_items}}"></td>
+                      <td>{{item.service_type}}</td>
+                      <td>{{item.activity}}</td>
+                      <td>{{item.price_per_item}}</td>
+                      <td>{{item.price}}</td>
+                      <td><button type="button" name="button" id="{{item.id}}" class="cancel waves-effect blue-grey lighten-1 waves-light btn">X</button></td>
+                    </tr>
+                  {% endfor %}
+                  {% endif %}
+              </tbody>
+            </table>
+          </div>
+          <div style="position:absolute; bottom:0">
+            <h6><a class="btn btn-small waves-effect waves-light black-text white" id="discountBtn">Discount</a><span style='padding-left:20px; font-weight:bold' id="discounted"><input type="number" style="width:50px" class="browser-default" id='discountId' value="0"></span> % <a class="btn btn-small waves-effect waves-light black-text white" id="vatButton">VAT 5%</a> <a class="btn btn-small waves-effect waves-light black-text white" id="revertButton">Revert</a></h6>
+            <!-- <h6><a class="btn btn-small waves-effect waves-light black-text white" id="vatButton">VAT 5%</a> </h6> -->
+            <h6><b>SUB TOTAL</b> <span style='padding-left:50px;font-weight:bold' id="totalPrice" class=""></span> AED</h6>
+          </div>
+        {% endautoescape %}
+      </div>
+      <p id="notification"></p>
+    </div>
+
+      <div class="col s12 m6 l6">
+        <h6 style="" id="alertNewCustomerAdded"></h6>
+        <!-- <div class="" style="padding-bottom:5px;"> -->
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Shirt">Shirt</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Blouse">Blouse</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Vest" title="Vest">Vest</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Jeans"">Jeans</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Pyjamas">Pyjama</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Abayya">Abayya</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Saree">Saree</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Shorts">Shorts</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Tshirt">T-Shirt</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Pillow">Pillow</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="PillowCase">Pllcase</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Tie" title="Tie">Tie</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item"  id="Apron" title="Apron">Apron</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Skirt">Skirt</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1 item" id="Scarf" title="Scarf">Scarf</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1  item" id="Lungi" title="Lungi">Lungi</a>
+          <a class="btn btn-floating btn-large waves-effect waves-light blue-grey lighten-1  item" id="Ghatra" title="Ghatra">Ghatra</a>
+          <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1 modal-close item" id="Shawl" title="Shawl">Shawl</a>
+          <a class="btn btn-large  btn-floating waves-effect waves-light  blue-grey lighten-1 modal-close item" id="Sweater" title="Sweater">Sweater</a>
+          <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1  modal-close item" id="Dupatta" title="Dupatta">Dupatta</a>
+          <a href="#modal1" class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 modal-trigger" id="more">More</a>
+          <a class="btn btn-large btn-floating waves-effect waves-light blue lighten-2" id="clear" title="clear">Clear</a>
+          <a class="btn btn-large btn-floating waves-effect waves-light green  lighten-2" id="refresh" title="Refresh">Refresh</a>
+          <a class="btn btn-large btn-floating waves-effect waves-light red lighten-2" id="resetButton" title="Reset">Reset</a>
+
+          <div class="row">
+            <div class="col s12 l6 m12">
+              <form class="" action="{% url 'add_item' %}" method="post">
+                {% csrf_token %}
+              <h6>{{form.contact.label}}</h6>
+                  {{form.contact}}
+              <h6>{{form.salesman.label}}</h6>
+                    {{form.salesman}}
+              <h6>{{form.activity.label}}</h6>
+                  {{form.activity}}
+              <h6>{{form.service_type.label}}</h6>
+                   {{form.service_type}}
+             <!--Item number input is a HiddenInput field that recieve the current item quantity-->
+                   {{form.number}}
+                  {{form.price}}
+              <!--Item input is a HiddenInput field that recieve the current selected item-->
+                  {{form.item}}
+            <!--price_per_item is a HiddenInput field that recieve the current selected item-->
+                  {{form.price_per_item}}
+              </form>
+              <button id="addBtn" style="margin-top: 25px;" class="btn waves-effect waves-light cyan accent-4" type="submit">
+                 Add
+              </button>
+            </div>
+            <div class="col s12 l6 m12">
+              <div class="" style="margin-top:20px">
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 number" title="1" id="1">1</a>
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 number" id="2" title="2">2</a>
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 number"  id="3" title="3">3</a>
+                  <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 number" title="4" id="4">4</a>
+              </div>
+              <div class="" >
+                <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 number" id="5" title="5">5</a>
+                <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 number" id="6" title="6">6</a>
+                <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4  number" id="7" title="7">7</a>
+                <a class="btn btn-floating btn-large waves-effect waves-light cyan accent-4 number" id="8">8</a>
+              </div>
+              <div class="">
+                <a class="btn btn-large btn-floating waves-effect waves-light cyan accent-4 number" id="9" title="9">9</a>
+                <a class="btn btn-large btn-floating waves-effect waves-light cyan accent-4 number" id="0" title="0">0</a>
+                <a class="btn btn-large btn-floating waves-effect waves-light blue-grey lighten-1" title="Del" id="deleteNumberButton" >Del</a>
+              </div>
+            </div>
+          </div>
+
+      </div>
+      <div class="fixed-action-btn">
+          <a class="btn-floating green btn-large modal-trigger blue-grey lighten-1" id="print" >Print</a>
+          <a class="btn-floating green btn-large modal-trigger" href="#modal3" id="cashButton">Cash</a>
+          <a class="btn-floating waves-light red lighten-2  btn-large" id="add_order_as_credit">Credit</a>
+      </div>
+    </div>
+  {% endblock %}
+<script>
+
+
+
+</script>

@@ -1,0 +1,54 @@
+{% extends 'base.html'%}
+  {% block title %}Home{% endblock %}
+  {% block body %}
+  {% if user.is_authenticated %}
+  <center>
+    <a class="btn waves-effect waves-light cyan accent-4 center " href="{% url 'dashboard'%}" style="margin-top:20px">
+      Go to Dashboard
+    </a>
+  </center>
+  {% else %}
+    <div class="container ">
+      <div class="row">
+          <div class="col s12 m3 l3 ">
+          </div>
+          <div class="col s12 m6 l6 loginForm card">
+            <center>
+              <h6><i class='black-text'>~ Welcome to wonderwash pos system ~ </i></h6>
+              <h6 class='black-text'>Login to get started</h6>
+            </center>
+            <form class="" action="" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <label for=""><h6>{{field.label}}</h6></label>
+                {{field}}
+                {% endfor %}
+                <div class="center" style="margin-top:10px">
+                  <button class="btn waves-effect waves-light cyan accent-4" type="submit" name="action">
+                    login
+                  </button>
+                </div>
+            </form>
+            <h6><p class="center"><a href="{% url 'password_reset' %}" style="color:#555">Lost password?</a></p></h6>
+            {% if form.errors %}
+               <p class="orange-text text-lighten-1">Your username and password didn't match. Please try again.</p>
+            {% endif %}
+          </div>
+          <div class="col s12 m3 l3 ">
+          </div>
+      </div>
+    </div>
+    {% endif %}
+  {% endblock %}
+    {% block javascript %}
+    <script>
+      function styleLogin(){
+        document.getElementById('id_username').className='browser-default'
+        document.getElementById('id_password').className='browser-default'
+        document.getElementById('id_password').style.backgroundColor='#fff'
+
+      }
+      styleLogin()
+    </script>
+
+    {% endblock %}
