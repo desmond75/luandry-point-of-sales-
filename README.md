@@ -1,4 +1,4 @@
-# This is a web based point of sales application i build
+# This is a web based point of sales application i build using Django
 # You can clone and user the default user to login and play with it 
 1) User: root77
 2) Password: root77
